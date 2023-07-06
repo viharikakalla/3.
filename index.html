@@ -1,13 +1,13 @@
 <!DOCTYPE html><html><head>
-      <title>8051architecture</title>
+      <title>8051PSW</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
       <link rel="stylesheet" href="file:///c:\Users\vihar\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.6.8\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
       
-      <link rel="stylesheet" href="file:///c:\Users\vihar\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.6.8\node_modules\@shd101wyy\mume\dependencies\font-awesome\css\font-awesome.min.css">
       
-      <script type="text/javascript" src="file:///c:\Users\vihar\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.6.8\node_modules\@shd101wyy\mume\dependencies\mermaid\mermaid.min.js" charset="UTF-8"></script>
+      
+      
       
       
       
@@ -261,136 +261,387 @@ pre[data-line] .line-highlight[data-end]:after {
     </head>
     <body for="html-export">
       <div class="mume markdown-preview  ">
-      <h1 class="mume-header" id="architecture-of-8051">ARCHITECTURE OF 8051</h1>
+      <h1 class="mume-header" id="psw-of-8051">PSW OF 8051</h1>
 
-<p>8051 Architecture is divided into the following :</p>
-<div class="mermaid">graph TB
-a(MICROCONTROLLER) --&gt; 1(PROCESSOR);
-a --&gt; 2(MEMORY);
-a --&gt; 3(I/O PORTS);
-</div><h3 class="mume-header" id="internal-block-diagram-of-8051">Internal Block Diagram of 8051</h3>
-
-<p><img src="https://electronicsdesk.com/wp-content/uploads/2019/05/archittecture-of-8051-microcontroller.jpg" alt="block diagram"></p>
-<p>&#x2B50;&#xFE0F; <strong>PROCESSOR :</strong><br>
-The processing unit contains the following :</p>
+<p><strong>PSW - Program status word<br>
+PSW is a flag register in 8051</strong></p>
 <ul>
-<li>ALU (8-bit)</li>
-<li>A , B registers (8-bit)</li>
-<li>PSW (8-bit)</li>
-<li>PC (16-bit)</li>
-<li>DPTR (16-bit)</li>
+<li>It is so called because it gives the status of the current result.</li>
+<li>It is an 8-bit Register.</li>
+<li><code>PSW is BIT addressable</code></li>
+<li>Only selected pins of the PSW can be changed by the programmer.</li>
 </ul>
-<p><i class="fa fa-star" aria-hidden="true"></i> <strong>ALU :</strong><br>
-ALU - Arithmetic Logic Unit</p>
-<ul>
-<li>It is an 8-bit register.</li>
-<li>It performs arithmetic and logical operations.</li>
-<li>Registers contain FlipFlops , 8-bit registers contain 8-flipflops.</li>
-</ul>
-<p><i class="fa fa-star" aria-hidden="true"></i> <strong>A and B registers :</strong></p>
-<ul>
-<li>A-Register :
-<ul>
-<li>It is an 8-bit register.</li>
-<li>A registor also known as <code>ACCUMULATOR</code> registor.</li>
-<li>Holds the <code>first operand</code> and also stores the <code>RESULT</code>.</li>
-</ul>
-</li>
-<li>B-Register :
-<ul>
-<li>It is an 8-bit register.</li>
-<li>Specially designed to to perform <code>multiplication</code> and <code>division</code> operation.</li>
-</ul>
-</li>
-</ul>
-<p><i class="fa fa-star" aria-hidden="true"></i> <strong>PSW :</strong><br>
-PSW-Program Status Word</p>
-<ul>
-<li>It is an 8-bit register (stores the DATA).</li>
-<li>PSW is a <code>Flag Register</code> in 8051.</li>
-<li>It holds the <code>status</code> of the result.<br>
-ALU changes the status of the flag register after every operation.<br>
-Even programmer can change certain flags.</li>
-</ul>
-<p><i class="fa fa-star" aria-hidden="true"></i> <strong>PC :</strong></p>
-<ul>
-<li>It is an 16-bit register (stores ADDRESS of the DATA).</li>
-<li>Stores data of comming instruction to be fetched.</li>
-<li>As every instruction is fetched , PC gets incremented (Automatically incremented).<br>
-<code>ADDRESS for instruction is given by PC</code></li>
-</ul>
-<p><i class="fa fa-star" aria-hidden="true"></i> <strong>DPTR :</strong><br>
-DPTR _ Data Pointer</p>
-<ul>
-<li>It points to the data.</li>
-<li>It gives the address of the data.</li>
-<li>It can be INCREMRNTED or DECREMENTED,i.e., can be controlled by the programmer .<br>
-<code>DPTR = DPH , DPL</code><br>
-we can modify the DPH and DPL byte seperately,instead of modifing the whole DPTR.<br>
-<code>ADDRESS for transfering data is given by DPTR</code></li>
-</ul>
-<p>&#x2B50;&#xFE0F; <strong>Memory section :</strong><br>
-one memory location carries one BYTE .</p>
-<ul>
-<li>INTERNAL RAM :<br>
-In internal RAM both DATA ana ADDRESS are 8-bit , but here we will use only 7-bits (2<sup>7</sup>).<br>
-<code>ADDRESS range = 00H - 7FH</code></li>
-<li>INTERNAL ROM :<br>
-Internal ROM have  8 DATA bits and 16 ADDRESS bits , but here we use only 12-bits (2<sup>12</sup>).<br>
-<code>ADDRESS range = 0000H - 0FFFH</code></li>
-</ul>
-<p>&#x2B50;&#xFE0F; <strong>I/O ports :</strong><br>
-8051 contains 4 ports :</p>
+<table>
+<thead>
+<tr>
+<th>CF</th>
+<th>AC</th>
+<th>F0</th>
+<th>RS1</th>
+<th>RS0</th>
+<th>OVR</th>
+<th>X</th>
+<th>P</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>psw.7</td>
+<td>psw.6</td>
+<td>psw.5</td>
+<td>psw.5</td>
+<td>psw.4</td>
+<td>psw.3</td>
+<td>psw.2</td>
+<td>psw.1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>PSW contains the following :</strong></p>
 <ol>
-<li>PO</li>
-<li>P1</li>
-<li>P2</li>
-<li>P3</li>
+<li>Carry flag (CF)</li>
+<li>Auxillary carry flag (AC)</li>
+<li>F0</li>
+<li>RS1</li>
+<li>RS2</li>
+<li>OVR</li>
+<li>X</li>
+<li>Parity flag (p)</li>
 </ol>
+<p>&#x2B50;&#xFE0F; <strong>Carry flag :</strong><br>
+It holds the value out of <code>MSB</code>.<br>
+<code>CF = 1</code> (if the result is out of MSB).<br>
+<code>CF = 0</code> (no carry).<br>
+Example 1: (without carry)</p>
+<table>
+<thead>
+<tr>
+<th>carry</th>
+<th>upper nibble</th>
+<th>lower nibble</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>0010</td>
+<td>0011</td>
+</tr>
+<tr>
+<td>+</td>
+<td>0011</td>
+<td>0001</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0</td>
+<td>0101</td>
+<td>0100</td>
+</tr>
+</tbody>
+</table>
+<p>here CF = 0;<br>
+Example 2: (with carry)</p>
+<table>
+<thead>
+<tr>
+<th>carry</th>
+<th>upper nibble</th>
+<th>lower nibble</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>1101</td>
+<td>1001</td>
+</tr>
+<tr>
+<td>+</td>
+<td>1100</td>
+<td>0111</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>1010</td>
+<td>0000</td>
+</tr>
+</tbody>
+</table>
+<p>here CF = 1;</p>
+<p>&#x2B50;&#xFE0F; <strong>Auxillary Carry :</strong><br>
+NIBBLE = 4 bits<br>
+8 bits = 4 bits + 4 bits<br>
+LN - Lower nibble , HN - Higher nibble<br>
+0000   0000<br>
+(HN)    (LN)</p>
 <ul>
-<li>A-BUS carries 8-bit data and address to all ports.</li>
-<li>B-BUS carries 16-bit address to PO0 and PO2.</li>
+<li><code>carry that moves from Lower nibble(LN) to Higher nibble(HN) is known as Auxillary Carry.</code></li>
+<li><code>AC = 1</code> (if carry moves from LN to HN).<br>
+<code>AC = 0</code> (no carry moves from LN to HN).<br>
+Example 1: (without carry)</li>
 </ul>
+<table>
+<thead>
+<tr>
+<th>carry</th>
+<th>upper nibble</th>
+<th>lower nibble</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AC</td>
+<td>0100</td>
+<td>011</td>
+</tr>
+<tr>
+<td></td>
+<td>0010</td>
+<td>0011</td>
+</tr>
+<tr>
+<td>+</td>
+<td>0011</td>
+<td>0001</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0</td>
+<td>0101</td>
+<td>0100</td>
+</tr>
+</tbody>
+</table>
+<p>here AC = 0 ;<br>
+Example 2: (with carry)</p>
+<table>
+<thead>
+<tr>
+<th>carry</th>
+<th>upper nibble</th>
+<th>lower nibble</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AC</td>
+<td>1011</td>
+<td>111</td>
+</tr>
+<tr>
+<td></td>
+<td>1101</td>
+<td>1001</td>
+</tr>
+<tr>
+<td>+</td>
+<td>1100</td>
+<td>0111</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>1010</td>
+<td>0000</td>
+</tr>
+</tbody>
+</table>
+<p>here AC = 1 ;</p>
+<p>&#x2B50;&#xFE0F; <strong>F0 :</strong><br>
+<code>It is a User defined flag</code></p>
+<ul>
+<li>SETB - used to set the F0 (<code>F0 = 1</code>).</li>
+<li>CLR - used to clear the F0 (<code>F0 = 0</code>).</li>
+</ul>
+<p>&#x2B50;&#xFE0F; <strong>RS1,RS0 :</strong><br>
+These flags are known as <code>Register Bank Select</code></p>
+<ul>
+<li>These flags are part of internal RAM .<br>
+(Internal RAM contains 32- registers . 32 registers are divided into 4 banks , each bank take 8-registers).</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>RS1</th>
+<th>RS0</th>
+<th>BANK</th>
+<th>REGISTERS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>B0</td>
+<td>R0 - R7</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>B1</td>
+<td>R0 - R7</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>B2</td>
+<td>R0 - R7</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>B3</td>
+<td>R0 - R7</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>These flags are used to select the desired bank to be active , writting the following instructions in our program .</li>
+<li>SETB = 1<br>
+CLR = 0</li>
+</ul>
+<p>&#x2B50;&#xFE0F; <strong>OVR :</strong><br>
+OVR - OVERFLOW</p>
+<ul>
+<li><code>OVR = 1</code> (Overflow)<br>
+<code>OVR = 0</code> (no overflow)</li>
+<li>Overflow flag uses <code>signed</code> data typ.i,e,. it contains both POSITIVE and NEGTIVE  bits .</li>
+<li><code>Address range = -80h - 7F</code> .<br>
+negative range = -80 - 0 ,<br>
+positive range = 0 - 7F .</li>
+<li>If the RESULT is above or below the RANGE , then overflow flag <code>OVR = 1</code> else <code>OVR = 0</code>.</li>
+<li>Overflow flag is determined by performing the <code>EX-OR</code> operation to carry <code>C6</code> and <code>C7</code>.</li>
+<li>In general for an 8-bit operation 6 carries will be formed (C6,C5,C4,C3,C2,C1,C0). and C7 is the carry of &apos;carry flag bit&apos;.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>C6</th>
+<th>C7</th>
+<th>OVR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>&#x2B50;&#xFE0F; <strong>X :</strong><br>
+This flag is not used .</p>
+<p>&#x2B50;&#xFE0F; <strong>Parity :</strong></p>
+<ul>
+<li>If the totql number of 1&apos;s is odd , <code>P = 1</code>.</li>
+<li>If the total number of 1&apos;s is even , <code>P = 0</code><br>
+Example 1: (Odd Parity)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parity</th>
+<th>upper nibble</th>
+<th>lower nibble</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>0010</td>
+<td>0011</td>
+</tr>
+<tr>
+<td>+</td>
+<td>0011</td>
+<td>0001</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>0101</td>
+<td>0100</td>
+</tr>
+</tbody>
+</table>
+<p>here P = 1;<br>
+Example 2: (Even parity)</p>
+<table>
+<thead>
+<tr>
+<th>Parity</th>
+<th>upper nibble</th>
+<th>lower nibble</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>1101</td>
+<td>1001</td>
+</tr>
+<tr>
+<td></td>
+<td>1100</td>
+<td>0111</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0</td>
+<td>1010</td>
+<td>0000</td>
+</tr>
+</tbody>
+</table>
+<p>here P = 0 ;</p>
 
       </div>
       
       
     
     
-    <script>
-// config mermaid init call
-// http://knsv.github.io/mermaid/#configuration
-//
-// You can edit the 'MERMAID_CONFIG' variable below.
-MERMAID_CONFIG = {
-  startOnLoad: false
-}
-
-if (window['MERMAID_CONFIG']) {
-  window['MERMAID_CONFIG'].startOnLoad = false
-  window['MERMAID_CONFIG'].cloneCssStyles = false
-  window['MERMAID_CONFIG'].theme = "default"
-}
-mermaid.initialize(window['MERMAID_CONFIG'] || {})
-if (typeof(window['Reveal']) !== 'undefined') {
-  function mermaidRevealHelper(event) {
-    var currentSlide = event.currentSlide
-    var diagrams = currentSlide.querySelectorAll('.mermaid')
-    for (var i = 0; i < diagrams.length; i++) {
-      var diagram = diagrams[i]
-      if (!diagram.hasAttribute('data-processed')) {
-        mermaid.init(null, diagram, ()=> {
-          Reveal.slide(event.indexh, event.indexv)
-        })
-      }
-    }
-  }
-  Reveal.addEventListener('slidechanged', mermaidRevealHelper)
-  Reveal.addEventListener('ready', mermaidRevealHelper)
-} else {
-  mermaid.init(null, document.querySelectorAll('.mermaid'))
-}
-</script>
+    
     
     
     
